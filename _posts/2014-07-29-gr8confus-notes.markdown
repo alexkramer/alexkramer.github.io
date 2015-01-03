@@ -2,7 +2,7 @@
 layout: post
 title:  "Gr8ConfUS 2014"
 date:   2014-07-29 14:34:25
-categories: jekyll update
+categories: grails
 tags: groovy grails
 image: /assets/article_images/2014-07-29-gr8confus-notes/schulze-hall-exterior.jpg
 ---
