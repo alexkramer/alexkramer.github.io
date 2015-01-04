@@ -1,8 +1,10 @@
-mediator
+My Personal Website
 ========
 
+[![Build Status](https://secure.travis-ci.org/alexkramer/alexkramer.github.io.svg?branch=master)](https://travis-ci.org/alexkramer/alexkramer.github.io)
+
 A medium inspired Jekyll blog theme. The basic idea came from the Ghost theme
-[Readium 2.0](http://www.svenread.com/readium-ghost-theme/). I use mediator on my own blog [The Base](http://blog.base68.com).
+[Readium 2.0](http://www.svenread.com/readium-ghost-theme/). I use mediator on my own [blog](http://www.alexckramer.com).
 
 Screenshots
 --------
@@ -67,13 +69,9 @@ The Liquid template engine will magical combine the different parts to a share u
 http://twitter.com/share?text=post_title&amp;url=post_url
 ````
 
-See [_config.yml](https://github.com/dirkfabisch/mediator/blob/master/_config.yml) for more examples.
+See [_config.yml](https://github.com/alexkramer/alexkramer.gitub.io/blob/master/_config.yml) for more examples.
 
 Licensing
 ---------
 
-[MIT](https://github.com/dirkfabisch/madiator/blob/master/LICENSE) with no added caveats, so feel free to use this on your site without linking back to me or using a disclaimer or anything silly like that.
-
-Contact
--------
-I'd love to hear from you at [@dirkfabisch](https://twitter.com/dirkfabisch). Feel free to open issues if you run into trouble or have suggestions. Pull Requests always welcome.
+[MIT](https://github.com/alexkramer/alexkramer.github.io/blob/master/LICENSE) with no added caveats, so feel free to use this on your site without linking back to me or using a disclaimer or anything silly like that.

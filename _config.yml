@@ -25,6 +25,8 @@ baseurl: ""
 gems:
   - jekyll-sitemap
 
+exclude: [vendor]
+
 # social icons and sharing options
 social:
   - icon:	twitter
