@@ -85,6 +85,12 @@
             </footer>
           </div>
         </div>
+        {% if page.comments == true %}
+        <section>
+        <h1>Comments</h1>
+          {% include disqus_comments.html %}
+        </section>
+      {% endif %} 
       </article>
     </main>
     <div class="bottom-closer">
