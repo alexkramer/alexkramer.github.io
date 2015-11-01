@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Groovy Safe Navigation Operator Is a Null Check Not a Truth Check"
-date:   2015-01-05 20:00:00
+date:   2015-03-28 20:00:00
 categories: groovy
 tags: groovy grails
 comments: true
@@ -41,4 +41,4 @@ assert ! (matriarch.relatives?.get(0)?.firstName)
 assert ! (matriarch.relatives?.collect{it.firstName}?.get(0))
 //The four options above will all work when the collection is explicitly null instead of empty
 //If you know that the collection will never be null you could replace the ?.get(0) with the array annotation [0]
-{% endhighlight %}
+{% endhighlight %}	
