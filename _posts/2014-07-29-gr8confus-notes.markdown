@@ -75,7 +75,7 @@ HibernateMetrics.withSqlLogging {
 2. Singleton – won't allow anyone else to create an instance
 3. Transactional – replaces the withTransaction closure
 4. CompileStatic – forces the groovy code to be Java compliant, useful for components that require performance
-5. Delegate – easy to override a single method of another bean without manually implementing all of the methods	
+5. Delegate – easy to override a single method of another bean without manually implementing all of the methods
 {% highlight groovy %}
 class MyMapHelper {
 	@Delegate
@@ -111,4 +111,4 @@ If you require a headless browser proxy, you can use Phantom JS
 - findOrCreateBy* and findOrSaveBy* – dynamic methods that I heard about and since implemented into our application
 - [GORM Performance](http://www.infoq.com/presentations/GORM-Performance) – talk by Burt at SpringSource conference
 - [Direction of Groovy in the future](https://github.com/sjurgemeyer/GR8ConfUS2014/tree/master/Guillaume%20Laforge)
-- [GPars](http://gpars.github.io/) – library to make async calls as well as multithreaded groovy applications. See presentation with code examples.
+- Gpars – library to make async calls as well as multithreaded groovy applications. See presentation with code examples.

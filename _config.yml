@@ -1,6 +1,5 @@
 # Build settings
 markdown: kramdown
-highlighter: pygments
 
 # Site settings
 title: "Alex Kramer"
