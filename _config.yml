@@ -24,6 +24,7 @@ baseurl: ""
 
 gems:
   - jekyll-sitemap
+  - jekyll_github_sample
 
 exclude: [vendor]
 

@@ -7,7 +7,7 @@ tags: groovy grails spring jms
 comments: true
 ---
 
-My Grails 2.2.1 application has for a while needed to connect to JMS queues. Configuration for that is fairly straighforward and its covered well in the documentation of relevant plugins (I use the Grails JMS Plugin). Recently it became necessary to add a few durable subscriptions to a topic (three to be exact, each with a different selector). Now in the interest of not polluting my configuration files, I wanted these three listeners to share a connection description and JMS container.
+My Grails 2.2.1 application has for a while needed to connect to JMS queues. Configuration for that is fairly straightforward and its covered well in the documentation of relevant plugins (I use the Grails JMS Plugin). Recently it became necessary to add a few durable subscriptions to a topic (three to be exact, each with a different selector). Now in the interest of not polluting my configuration files, I wanted these three listeners to share a connection description and JMS container.
 
 First hurdle was to have the three listeners connect my ActiveMQ instances. After not having much success I found that what was missing was a client id -- which you only need to set for durable subscriptions. The client id needs to be setup on the connection factory in resources.groovy (not in the adapter or container settings). Below are examples of the the resources.groovy settings and Config.groovy settings respectively.
 
