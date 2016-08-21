@@ -33,16 +33,12 @@ integrated into my application I figured this was a perfect use case.
 First I needed a service that would be called after a failed attempt and
 increment the number of attempts in Redis for the given user.
 
-{% highlight groovy %}
-{% github_sample /alexkramer/grails-security-rest-redis-sample/blob/1332a4189af4ef43f680b33f9e90cccda3c4441e/grails-app/services/grails/security/rest/redis/LoginAttemptsService.groovy %}
-{% endhighlight %}
+<script src="http://gist-it.appspot.com/github/alexkramer/grails-security-rest-redis-sample/blob/1332a4189af4ef43f680b33f9e90cccda3c4441e/grails-app/services/grails/security/rest/redis/LoginAttemptsService.groovy"></script>
 
 Second I needed to listen to the failed login events and make calls out to the
 above service when the failed login event corresponded with a known user.
 
-{% highlight groovy %}
-{% github_sample /alexkramer/grails-security-rest-redis-sample/blob/1332a4189af4ef43f680b33f9e90cccda3c4441e/src/main/groovy/grails/security/rest/redis/FailedLoginListener.groovy %}
-{% endhighlight %}
+<script src="http://gist-it.appspot.com/github/alexkramer/grails-security-rest-redis-sample/blob/1332a4189af4ef43f680b33f9e90cccda3c4441e/src/main/groovy/grails/security/rest/redis/FailedLoginListener.groovy"></script>
 
 And with just those two files, I enabled user locking! For a working sample
 application please check out my sample repo:
