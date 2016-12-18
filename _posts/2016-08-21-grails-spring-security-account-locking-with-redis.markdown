@@ -7,7 +7,7 @@ tags: grails groovy spring security redis
 comments: true
 ---
 
-For a new project at Good Start Genetics we decided to use Grails 3 to build a
+For a new project at [Good Start Genetics](http://wwww.goodstartgenetics.com) we decided to use Grails 3 to build a
 RESTful JSON API. As with all of the Grails applications and services we have
 built we installed the Spring Security Core plugin. Given that this was an API
 only, we also integrated the Spring Security REST extension. This latter plugin
