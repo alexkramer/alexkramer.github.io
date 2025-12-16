@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{TITLE}} - Alex Kramer</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <meta name="description" content="{{DESCRIPTION}}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@300;400;600;700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../src/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark.min.css">
+    <script>
+      document.getElementById('copyright-year').textContent = new Date().getFullYear();
+    </script>
+</head>
+<body class="font-sans bg-cream text-charcoal">
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 bg-cream/95 backdrop-blur-md z-50 px-6 lg:px-12 py-6 border-b border-clay/15">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <a href="/" class="font-serif font-semibold text-xl text-clay hover:text-terracotta transition-colors">Alex Kramer</a>
+            <ul class="flex gap-6 lg:gap-10">
+                <li><a href="/#about" class="text-sm lg:text-base hover:text-clay transition-colors">About</a></li>
+                <li><a href="/#experience" class="text-sm lg:text-base hover:text-clay transition-colors">Experience</a></li>
+                <li><a href="/blog/" class="text-sm lg:text-base text-clay font-medium">Writing</a></li>
+                <li><a href="/#contact" class="text-sm lg:text-base hover:text-clay transition-colors">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Article Header -->
+    <article class="mt-24 lg:mt-32">
+        <header class="px-6 lg:px-12 py-16 bg-gradient-to-br from-warm-white to-cream border-b border-sand">
+            <div class="max-w-3xl mx-auto">
+                <a href="/blog/" class="inline-flex items-center gap-2 text-clay hover:text-terracotta transition-colors mb-8 group">
+                    <span class="group-hover:-translate-x-1 transition-transform">←</span>
+                    Back to Blog
+                </a>
+                <h1 class="font-serif text-3xl lg:text-5xl font-semibold text-charcoal mb-6">{{TITLE}}</h1>
+                <div class="flex items-center gap-4 text-warm-grey">
+                    <time>{{DATE}}</time>
+                </div>
+            </div>
+        </header>
+
+        <!-- Article Content -->
+        <div class="px-6 lg:px-12 py-16">
+            <div class="max-w-3xl mx-auto prose prose-lg prose-charcoal">
+                {{CONTENT}}
+            </div>
+        </div>
+    </article>
+
+    <!-- Footer -->
+    <footer class="text-center px-6 py-12 text-warm-grey border-t border-sand">
+        <div class="flex justify-center gap-8 mb-4 flex-wrap">
+            <a href="https://github.com/alexkramer" target="_blank" class="hover:text-clay transition-colors">GitHub</a>
+            <a href="https://linkedin.com/in/alexckramer/" target="_blank" class="hover:text-clay transition-colors">LinkedIn</a>
+            <a href="mailto:ackramer19@gmail.com" class="hover:text-clay transition-colors">Email</a>
+        </div>
+        <p class="text-sm">&copy; <span id="copyright-year"></span> Alex Kramer. Greater Boston Area.</p>
+    </footer>
+
+    <style>
+        /* Custom prose styling for blog content */
+        .prose {
+            color: var(--charcoal);
+        }
+        .prose h1, .prose h2, .prose h3, .prose h4, .prose h5, .prose h6 {
+            font-family: 'Crimson Pro', serif;
+            color: #2d2d2a;
+            font-weight: 600;
+            margin-top: 2em;
+            margin-bottom: 1em;
+        }
+        .prose h2 {
+            font-size: 2em;
+        }
+        .prose h3 {
+            font-size: 1.5em;
+        }
+        .prose p {
+            margin-bottom: 1.5em;
+            line-height: 1.8;
+        }
+        .prose a {
+            color: #c77255;
+            text-decoration: underline;
+            text-decoration-thickness: 1px;
+            text-underline-offset: 2px;
+            transition: color 0.3s;
+        }
+        .prose a:hover {
+            color: #d47555;
+        }
+        .prose code {
+            background: #e8dfd2;
+            padding: 0.2em 0.4em;
+            border-radius: 0.25em;
+            font-size: 0.9em;
+            font-family: 'Monaco', 'Courier New', monospace;
+        }
+        .prose pre {
+            background: #2d2d2a;
+            color: #faf8f3;
+            padding: 1.5em;
+            border-radius: 0.5em;
+            overflow-x: auto;
+            margin: 2em 0;
+        }
+        .prose pre code {
+            background: transparent;
+            padding: 0;
+            color: inherit;
+        }
+        .prose ul, .prose ol {
+            margin-bottom: 1.5em;
+            padding-left: 2em;
+        }
+        .prose ul {
+          list-style-type: disc;  /* ← Added */
+        }
+        .prose ol {
+          list-style-type: decimal;  /* ← Added */
+        }
+        .prose li {
+            margin-bottom: 0.5em;
+        }
+        .prose blockquote {
+            border-left: 4px solid #c77255;
+            padding-left: 1.5em;
+            margin: 2em 0;
+            font-style: italic;
+            color: #9d9890;
+        }
+        .prose img {
+            border-radius: 0.5em;
+            margin: 2em 0;
+        }
+        .prose table {
+            width: 100%;
+            margin: 2em 0;
+            border-collapse: collapse;
+        }
+        .prose th, .prose td {
+            padding: 0.75em;
+            border: 1px solid #e8dfd2;
+            text-align: left;
+        }
+        .prose th {
+            background: #e8dfd2;
+            font-weight: 600;
+        }
+    </style>
+</body>
+</html>

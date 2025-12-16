@@ -1,0 +1,20 @@
+{
+  "name": "alexkramer-website",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "node scripts/build-blog.js && node scripts/inject-blog-preview.js && vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.49",
+    "tailwindcss": "^3.4.17",
+    "vite": "^7.2.7",
+    "gray-matter": "^4.0.3",
+    "marked": "^14.1.3",
+    "marked-highlight": "^2.2.3",
+    "highlight.js": "^11.11.1"
+  }
+}

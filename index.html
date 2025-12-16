@@ -1,95 +1,464 @@
----
-layout: default
----
-
-<div class="teaserimage">
-    <div class="teaserimage-image" {% if site.cover %}style="background-image: url({{ site.cover }})"{% endif %}>
-        Teaser Image
-    </div>
-</div>
-
-<header class="blog-header">
-    {% if site.logo %}
-      <a class="blog-logo" href="{{site.url}}" style="background-image: url('{{ site.logo }}')">{{ site.title }}</a>
-    {% endif %}
-    <h1 class="blog-title">{{ site.title }}</h1>
-    <h2 class="blog-description">{{ site.description }}</h2>
-    <div class="custom-links">
-      {% for social in site.social %}
-        {% if social.url %}
-            <a class="icon-{{ social.icon }}" href="{{ social.url }}">
-              <i class="fa fa-{{ social.icon }}"></i>
-            </a>
-            &nbsp;&nbsp;·&nbsp;&nbsp;
-        {% endif %}
-      {% endfor %}
-      <a href="/about/">About</a>
-    </div>
-</header>
-
-
-<main class="content" role="main">
-
-    {% if site.tags.featured %}
-    <h5 class="index-headline featured"><span>Featured</span></h5>
-
-    <div class="container featured">
-      {% for post in site.tags.featured %}
-        <article class="post" itemscope itemtype="http://schema.org/BlogPosting" role="article">
-          <div class="article-item">
-            <header class="post-header">
-              <h2 class="post-title" itemprop="name"><a href="{{ post.url }}" itemprop="url">{{ post.title }}</a></h2>
-            </header>
-            <section class="post-excerpt" itemprop="description">
-              <p>{{ post.content | strip_html | truncatewords: 50 }}</p>
-            </section>
-            <div class="post-meta">
-              <time datetime="{{ post.date | date_to_long_string }}">{{ post.date | date_to_long_string }}</time>
-  <!--            <span class="post-tags-set">on {{#foreach tags}}<span class="post-tag-{{slug}}">{{#if @first}}{{else}}, {{/if}}<a href="/tag/{{slug}}">{{name}}</a></span>{{/foreach}}</span>-->
-            </div>
-          <div>
-        </article>
-      {% endfor %}
-    </div>
-
-    <h5 class="index-headline normal"><span>Regular</span></h5>
-    {% endif %}
-
-    <div class="cf frame">
-      {% for post in paginator.posts %}
-        <article class="post" itemscope itemtype="http://schema.org/BlogPosting" role="article">
-          <div class="article-item">
-            <header class="post-header">
-              <h2 class="post-title" itemprop="name"><a href="{{ post.url }}" itemprop="url">{{ post.title }}</a></h2>
-            </header>
-            <section class="post-excerpt" itemprop="description">
-              <p>{{ post.content | strip_html | truncatewords: 50 }}</p>
-            </section>
-            <div class="post-meta">
-              <time datetime="{{ post.date | date_to_long_string }}">{{ post.date | date_to_long_string }}</time>
-<!--            <span class="post-tags-set">on {{#foreach tags}}<span class="post-tag-{{slug}}">{{#if @first}}{{else}}, {{/if}}<a href="/tag/{{slug}}">{{name}}</a></span>{{/foreach}}</span>-->
-            </div>
-          <div>
-        </article>
-      {% endfor %}
-    </div>
-
-    <nav class="pagination" role="navigation">
-      {% if paginator.next_page %}
-        <a class="newer-posts" href="/page{{paginator.next_page}}">&larr; Older posts</a>
-      {% endif %}
-      <span class="page-number">Page {{ paginator.page }} of {{ paginator.total_pages }}</span>
-      {% if paginator.previous_page %}
-        {% if paginator.page == 2 %}
-          <a class="older-posts" href="/">Newer posts &rarr;</a>
-        {% else %}
-          <a class="older-posts" href="/page{{paginator.previous_page}}">Newer posts &rarr;</a>
-        {% endif %}
-      {% endif %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alex Kramer - Product & Technology Executive</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <meta name="description" content="Fractional CTO and Product Executive specializing in healthcare technology, HIPAA compliance, and digital health platforms.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@300;400;600;700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./src/style.css">
+    <script>
+      document.getElementById('copyright-year').textContent = new Date().getFullYear();
+    </script>
+</head>
+<body class="font-sans bg-cream text-charcoal">
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 bg-cream/95 backdrop-blur-md z-50 px-6 lg:px-12 py-6 border-b border-clay/15">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="font-serif font-semibold text-xl text-clay">Alex Kramer</div>
+            <ul class="flex gap-6 lg:gap-10">
+                <li><a href="#about" class="text-sm lg:text-base hover:text-clay transition-colors relative group">
+                    About
+                    <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-clay transition-all group-hover:w-full"></span>
+                </a></li>
+                <li><a href="#experience" class="text-sm lg:text-base hover:text-clay transition-colors relative group">
+                    Experience
+                    <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-clay transition-all group-hover:w-full"></span>
+                </a></li>
+                <li><a href="#expertise" class="text-sm lg:text-base hover:text-clay transition-colors relative group">
+                    Expertise
+                    <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-clay transition-all group-hover:w-full"></span>
+                </a></li>
+                <li><a href="/blog/" class="text-sm lg:text-base hover:text-clay transition-colors relative group">
+                    Writing
+                    <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-clay transition-all group-hover:w-full"></span>
+                </a></li>
+                <li><a href="#contact" class="text-sm lg:text-base hover:text-clay transition-colors relative group">
+                    Contact
+                    <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-clay transition-all group-hover:w-full"></span>
+                </a></li>
+            </ul>
+        </div>
     </nav>
 
+    <!-- Hero Section -->
+    <section class="mt-24 lg:mt-32 px-6 lg:px-12 py-16 lg:py-24 bg-gradient-to-br from-warm-white to-cream relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-96 lg:w-[600px] h-96 lg:h-[600px] -translate-y-1/2 translate-x-1/4 bg-clay/8 rounded-full blur-3xl"></div>
+        
+        <div class="max-w-7xl mx-auto relative z-10">
+            <div class="flex flex-col lg:flex-row items-start lg:items-center gap-8 lg:gap-12">
+                <!-- Headshot -->
+                <div class="flex-shrink-0 mx-auto lg:mx-0">
+                    <div class="relative">
+                        <div class="absolute inset-0 bg-gradient-to-br from-clay/20 to-sage/20 rounded-full blur-2xl"></div>
+                        <img 
+                            src="/images/headshot.jpg" 
+                            alt="Alex Kramer headshot" 
+                            class="relative w-48 h-48 lg:w-56 lg:h-56 rounded-full object-cover border-4 border-warm-white shadow-xl ring-2 ring-clay/10"
+                        >
+                    </div>
+                </div>
 
-    <!-- {{!! After all the posts, we have the previous/next pagination links }}
-    {{pagination}} -->
+                <!-- Content -->
+                <div class="flex-1 text-center lg:text-left">
+                    <div class="inline-block bg-sage text-warm-white px-6 py-2 rounded-full text-sm font-medium mb-6">
+                        Fractional CTO & Product Executive
+                    </div>
+                    
+                    <h1 class="font-serif text-4xl lg:text-5xl xl:text-6xl font-light leading-tight mb-6">
+                        Transforming <strong class="font-bold text-clay">healthcare technology</strong> from ideation to commercialization
+                    </h1>
+                    
+                    <p class="text-lg lg:text-xl text-warm-grey max-w-3xl mb-10 leading-relaxed">
+                        Start-up executive and builder with demonstrable experience taking products from concept to market-ready solutions. Specializing in digital healthcare, lab diagnostics, and HIPAA-compliant platforms that solve real-world problems at scale.
+                    </p>
+                    
+                    <a href="#contact" class="inline-flex items-center gap-2 bg-clay text-warm-white px-8 py-4 rounded-full font-medium transition-all hover:bg-terracotta hover:-translate-y-1 shadow-lg hover:shadow-xl shadow-clay/25 hover:shadow-clay/35">
+                        Let's Discuss Your Project
+                        <span>→</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
 
-</main>
+    <!-- Value Proposition Section -->
+    <section id="about" class="px-6 lg:px-12 py-16 lg:py-20">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <div class="inline-block text-xs lg:text-sm uppercase tracking-widest text-clay font-medium mb-4">What I Offer</div>
+                <h2 class="font-serif text-3xl lg:text-5xl font-semibold text-charcoal mb-4">Strategic Leadership for Healthcare Startups</h2>
+                <p class="text-lg lg:text-xl text-warm-grey max-w-2xl mx-auto">Providing CTO and VP-level advisory services to healthcare startups and regulated companies</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="bg-warm-white rounded-3xl p-8 lg:p-10 shadow-sm hover:shadow-md transition-shadow">
+                    <div class="font-serif text-5xl font-bold text-clay opacity-30 mb-4">01</div>
+                    <h3 class="font-serif text-xl lg:text-2xl font-semibold text-charcoal mb-4">Product & Technology Strategy</h3>
+                    <p class="text-warm-grey leading-relaxed">End-to-end product lifecycle management from ideation through commercialization, with deep expertise in digital healthcare and lab diagnostics.</p>
+                </div>
+
+                <div class="bg-warm-white rounded-3xl p-8 lg:p-10 shadow-sm hover:shadow-md transition-shadow">
+                    <div class="font-serif text-5xl font-bold text-clay opacity-30 mb-4">02</div>
+                    <h3 class="font-serif text-xl lg:text-2xl font-semibold text-charcoal mb-4">Team Building & Leadership</h3>
+                    <p class="text-warm-grey leading-relaxed">Assembling and growing high-performing teams across hybrid, remote, and near-shore configurations that deliver results.</p>
+                </div>
+
+                <div class="bg-warm-white rounded-3xl p-8 lg:p-10 shadow-sm hover:shadow-md transition-shadow">
+                    <div class="font-serif text-5xl font-bold text-clay opacity-30 mb-4">03</div>
+                    <h3 class="font-serif text-xl lg:text-2xl font-semibold text-charcoal mb-4">Compliance & Security</h3>
+                    <p class="text-warm-grey leading-relaxed">HIPAA-compliant architecture, SOC-2 Type 2 certification, FDA regulatory affairs, and enterprise security best practices.</p>
+                </div>
+
+                <div class="bg-warm-white rounded-3xl p-8 lg:p-10 shadow-sm hover:shadow-md transition-shadow">
+                    <div class="font-serif text-5xl font-bold text-clay opacity-30 mb-4">04</div>
+                    <h3 class="font-serif text-xl lg:text-2xl font-semibold text-charcoal mb-4">Business Operations</h3>
+                    <p class="text-warm-grey leading-relaxed">Cross-functional coordination across operations, business development, strategic partnerships, regulatory, finance, and legal.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="px-6 lg:px-12 py-16 lg:py-20">
+        <div class="max-w-5xl mx-auto">
+            <div class="text-center mb-16">
+                <div class="inline-block text-xs lg:text-sm uppercase tracking-widest text-clay font-medium mb-4">Professional Journey</div>
+                <h2 class="font-serif text-3xl lg:text-5xl font-semibold text-charcoal mb-4">Leadership Experience</h2>
+                <p class="text-lg lg:text-xl text-warm-grey max-w-2xl mx-auto">Proven track record building and scaling healthcare technology platforms</p>
+            </div>
+
+            <div class="relative pl-8 lg:pl-12">
+                <!-- Timeline line -->
+                <div class="absolute left-0 top-0 bottom-0 w-0.5 bg-gradient-to-b from-clay to-sage"></div>
+
+                <!-- Experience Item 1 -->
+                <div class="relative mb-12 bg-warm-white rounded-3xl p-8 lg:p-10 shadow-sm">
+                    <div class="absolute left-[-3.25rem] lg:left-[-3.5rem] top-10 w-3.5 h-3.5 bg-clay rounded-full border-[3px] border-cream"></div>
+                    
+                    <div class="flex flex-col lg:flex-row justify-between items-start gap-4 mb-6">
+                        <div>
+                            <h3 class="font-serif text-2xl font-semibold text-clay mb-2">Fractional CTO</h3>
+                            <div class="text-lg font-medium text-charcoal">Self-employed</div>
+                        </div>
+                        <div class="text-warm-grey whitespace-nowrap">Sep 2023 - Present</div>
+                    </div>
+                    
+                    <p class="text-charcoal mb-6 leading-relaxed">
+                        Providing technical and product advisory services to healthcare startups and similarly regulated companies (life insurance, fintech). Focus on HIPAA compliance, regulatory strategy, and scalable platform architecture.
+                    </p>
+                </div>
+
+                <!-- Experience Item 2 -->
+                <div class="relative mb-12 bg-warm-white rounded-3xl p-8 lg:p-10 shadow-sm">
+                    <div class="absolute left-[-3.25rem] lg:left-[-3.5rem] top-10 w-3.5 h-3.5 bg-clay rounded-full border-[3px] border-cream"></div>
+                    
+                    <div class="flex flex-col lg:flex-row justify-between items-start gap-4 mb-6">
+                        <div>
+                            <h3 class="font-serif text-2xl font-semibold text-clay mb-2">Consulting CTO</h3>
+                            <div class="text-lg font-medium text-charcoal">imaware</div>
+                        </div>
+                        <div class="text-warm-grey whitespace-nowrap">Sep 2023 - Present</div>
+                    </div>
+                    
+                    <p class="text-charcoal mb-6 leading-relaxed">
+                        Hands-on leader overseeing all facets of the business including product, technology, security, sales, regulatory, and logistics. Successfully repositioned the company from DTC to B2B model.
+                    </p>
+                    
+                    <ul class="space-y-3">
+                        <li class="flex items-start gap-3">
+                            <span class="text-sage text-2xl leading-none mt-1">•</span>
+                            <span class="text-charcoal">Consolidated two platforms into one, realizing 75% savings in cloud spend</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-sage text-2xl leading-none mt-1">•</span>
+                            <span class="text-charcoal">Led business repositioning from DTC to B2B including new MSAs and pricing strategies</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-sage text-2xl leading-none mt-1">•</span>
+                            <span class="text-charcoal">Managed all technology, security, regulatory, and operational initiatives</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Experience Item 3 -->
+                <div class="relative mb-12 bg-warm-white rounded-3xl p-8 lg:p-10 shadow-sm">
+                    <div class="absolute left-[-3.25rem] lg:left-[-3.5rem] top-10 w-3.5 h-3.5 bg-clay rounded-full border-[3px] border-cream"></div>
+                    
+                    <div class="flex flex-col lg:flex-row justify-between items-start gap-4 mb-6">
+                        <div>
+                            <h3 class="font-serif text-2xl font-semibold text-clay mb-2">Co-founder & CTO</h3>
+                            <div class="text-lg font-medium text-charcoal">BalancedWork</div>
+                        </div>
+                        <div class="text-warm-grey whitespace-nowrap">Nov 2023 - May 2024</div>
+                    </div>
+                    
+                    <p class="text-charcoal leading-relaxed">
+                        Built an application that ingested calendar, organizational, and related data to generate insights and recommendations for improving team relationships and hybrid work effectiveness.
+                    </p>
+                </div>
+
+                <!-- Experience Item 4 -->
+                <div class="relative mb-12 bg-warm-white rounded-3xl p-8 lg:p-10 shadow-sm">
+                    <div class="absolute left-[-3.25rem] lg:left-[-3.5rem] top-10 w-3.5 h-3.5 bg-clay rounded-full border-[3px] border-cream"></div>
+                    
+                    <div class="flex flex-col lg:flex-row justify-between items-start gap-4 mb-6">
+                        <div>
+                            <h3 class="font-serif text-2xl font-semibold text-clay mb-2">VP, Digital Product & Technology</h3>
+                            <div class="text-lg font-medium text-charcoal">binx health (acquired by imaware)</div>
+                        </div>
+                        <div class="text-warm-grey whitespace-nowrap">Apr 2019 - Aug 2023</div>
+                    </div>
+                    
+                    <p class="text-charcoal mb-6 leading-relaxed">
+                        Co-founded and architected the proprietary binx everywhere digital platform which enabled diagnostics-as-a-service at population-level scale. Built HIPAA-compliant and SOC-2 Type 2 certified platform serving state health departments, universities, and healthcare entities.
+                    </p>
+                    
+                    <ul class="space-y-3">
+                        <li class="flex items-start gap-3">
+                            <span class="text-sage text-2xl leading-none mt-1">•</span>
+                            <span class="text-charcoal">Built multiple high-performing teams combining in-person, remote, hybrid, and near-shore resources</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-sage text-2xl leading-none mt-1">•</span>
+                            <span class="text-charcoal">Created and executed business plan for population health COVID-19 screening programs and UK market expansion</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-sage text-2xl leading-none mt-1">•</span>
+                            <span class="text-charcoal">Led design and execution of usability study and FDA filing for one of the first EUAs for self-collected nasal swabs</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-sage text-2xl leading-none mt-1">•</span>
+                            <span class="text-charcoal">Managed binx io instrument software team through 510(k) filing and Windows 10 IoT migration</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-sage text-2xl leading-none mt-1">•</span>
+                            <span class="text-charcoal">Set strategic product roadmap for digital platform and instrument software</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-sage text-2xl leading-none mt-1">•</span>
+                            <span class="text-charcoal">Prepared digital business unit for Series A spinout, pitched investors, and supported successful M&A to imaware</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Experience Item 5 -->
+                <div class="relative bg-warm-white rounded-3xl p-8 lg:p-10 shadow-sm">
+                    <div class="absolute left-[-3.25rem] lg:left-[-3.5rem] top-10 w-3.5 h-3.5 bg-clay rounded-full border-[3px] border-cream"></div>
+                    
+                    <div class="flex flex-col lg:flex-row justify-between items-start gap-4 mb-6">
+                        <div>
+                            <h3 class="font-serif text-2xl font-semibold text-clay mb-2">Engineering Manager → Lead Software Engineer</h3>
+                            <div class="text-lg font-medium text-charcoal">Good Start Genetics (acquired by Invitae)</div>
+                        </div>
+                        <div class="text-warm-grey whitespace-nowrap">Mar 2015 - May 2018</div>
+                    </div>
+                    
+                    <p class="text-charcoal mb-6 leading-relaxed">
+                        Hands-on technical lead and manager for the development organization. Responsible for overall code quality, resource allocation, software design, enterprise architecture, and personnel management.
+                    </p>
+                    
+                    <ul class="space-y-3">
+                        <li class="flex items-start gap-3">
+                            <span class="text-sage text-2xl leading-none mt-1">•</span>
+                            <span class="text-charcoal">Devised new hiring program resulting in 7+ developers in 6 months plus 5 additional departmental hires</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-sage text-2xl leading-none mt-1">•</span>
+                            <span class="text-charcoal">Led development and architecture of company's first consumer-initiated carrier screening product (VeriYou)</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-sage text-2xl leading-none mt-1">•</span>
+                            <span class="text-charcoal">Launched patient-first experience with insurance transparency improving cash flows</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-sage text-2xl leading-none mt-1">•</span>
+                            <span class="text-charcoal">Spearheaded agile transformation increasing velocity and institutional value, contributing to successful company sale</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-sage text-2xl leading-none mt-1">•</span>
+                            <span class="text-charcoal">Orchestrated migration from on-premise to cloud infrastructure (AWS)</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Expertise Section -->
+    <section id="expertise" class="px-6 lg:px-12 py-16 lg:py-20">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <div class="inline-block text-xs lg:text-sm uppercase tracking-widest text-clay font-medium mb-4">Core Competencies</div>
+                <h2 class="font-serif text-3xl lg:text-5xl font-semibold text-charcoal mb-4">Executive Expertise</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Skill Card 1 -->
+                <div class="bg-warm-white rounded-3xl p-8 lg:p-10 shadow-sm hover:shadow-lg hover:-translate-y-2 transition-all">
+                    <div class="w-12 h-12 bg-gradient-to-br from-clay to-terracotta rounded-2xl flex items-center justify-center text-2xl mb-6">
+                        🎯
+                    </div>
+                    <h3 class="font-serif text-xl lg:text-2xl font-semibold text-charcoal mb-4">Strategic Leadership</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="bg-sand text-charcoal px-3 py-1.5 rounded-full text-sm">Product Strategy</span>
+                        <span class="bg-sand text-charcoal px-3 py-1.5 rounded-full text-sm">Technology Roadmap</span>
+                        <span class="bg-sand text-charcoal px-3 py-1.5 rounded-full text-sm">Team Building</span>
+                        <span class="bg-sand text-charcoal px-3 py-1.5 rounded-full text-sm">Cross-functional Leadership</span>
+                        <span class="bg-sand text-charcoal px-3 py-1.5 rounded-full text-sm">Business Operations</span>
+                        <span class="bg-sand text-charcoal px-3 py-1.5 rounded-full text-sm">M&A Support</span>
+                    </div>
+                </div>
+
+                <!-- Skill Card 2 -->
+                <div class="bg-warm-white rounded-3xl p-8 lg:p-10 shadow-sm hover:shadow-lg hover:-translate-y-2 transition-all">
+                    <div class="w-12 h-12 bg-gradient-to-br from-clay to-terracotta rounded-2xl flex items-center justify-center text-2xl mb-6">
+                        🔒
+                    </div>
+                    <h3 class="font-serif text-xl lg:text-2xl font-semibold text-charcoal mb-4">Compliance & Regulatory</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="bg-sand text-charcoal px-3 py-1.5 rounded-full text-sm">HIPAA</span>
+                        <span class="bg-sand text-charcoal px-3 py-1.5 rounded-full text-sm">SOC-2 Type 2</span>
+                        <span class="bg-sand text-charcoal px-3 py-1.5 rounded-full text-sm">FDA 510(k)</span>
+                        <span class="bg-sand text-charcoal px-3 py-1.5 rounded-full text-sm">FDA EUA</span>
+                        <span class="bg-sand text-charcoal px-3 py-1.5 rounded-full text-sm">IT Security</span>
+                        <span class="bg-sand text-charcoal px-3 py-1.5 rounded-full text-sm">Privacy & PHI</span>
+                    </div>
+                </div>
+
+                <!-- Skill Card 3 -->
+                <div class="bg-warm-white rounded-3xl p-8 lg:p-10 shadow-sm hover:shadow-lg hover:-translate-y-2 transition-all">
+                    <div class="w-12 h-12 bg-gradient-to-br from-clay to-terracotta rounded-2xl flex items-center justify-center text-2xl mb-6">
+                        ☁️
+                    </div>
+                    <h3 class="font-serif text-xl lg:text-2xl font-semibold text-charcoal mb-4">Enterprise Architecture</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="bg-sand text-charcoal px-3 py-1.5 rounded-full text-sm">Cloud Infrastructure</span>
+                        <span class="bg-sand text-charcoal px-3 py-1.5 rounded-full text-sm">GCP / AWS</span>
+                        <span class="bg-sand text-charcoal px-3 py-1.5 rounded-full text-sm">Kubernetes</span>
+                        <span class="bg-sand text-charcoal px-3 py-1.5 rounded-full text-sm">Microservices</span>
+                        <span class="bg-sand text-charcoal px-3 py-1.5 rounded-full text-sm">Platform Design</span>
+                        <span class="bg-sand text-charcoal px-3 py-1.5 rounded-full text-sm">Cost Optimization</span>
+                    </div>
+                </div>
+
+                <!-- Skill Card 4 -->
+                <div class="bg-warm-white rounded-3xl p-8 lg:p-10 shadow-sm hover:shadow-lg hover:-translate-y-2 transition-all">
+                    <div class="w-12 h-12 bg-gradient-to-br from-clay to-terracotta rounded-2xl flex items-center justify-center text-2xl mb-6">
+                        🏥
+                    </div>
+                    <h3 class="font-serif text-xl lg:text-2xl font-semibold text-charcoal mb-4">Healthcare Technology</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="bg-sand text-charcoal px-3 py-1.5 rounded-full text-sm">Lab Diagnostics</span>
+                        <span class="bg-sand text-charcoal px-3 py-1.5 rounded-full text-sm">Digital Health</span>
+                        <span class="bg-sand text-charcoal px-3 py-1.5 rounded-full text-sm">Medical Devices</span>
+                        <span class="bg-sand text-charcoal px-3 py-1.5 rounded-full text-sm">LIS/LIMS</span>
+                        <span class="bg-sand text-charcoal px-3 py-1.5 rounded-full text-sm">Patient Portals</span>
+                        <span class="bg-sand text-charcoal px-3 py-1.5 rounded-full text-sm">Population Health</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Writing Section -->
+    <section id="writing" class="px-6 lg:px-12 py-16 lg:py-20">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <div class="inline-block text-xs lg:text-sm uppercase tracking-widest text-clay font-medium mb-4">Insights & Thoughts</div>
+                <h2 class="font-serif text-3xl lg:text-5xl font-semibold text-charcoal mb-4">Recent Writing</h2>
+                <a href="/blog/" class="text-clay hover:text-terracotta transition-colors inline-flex items-center gap-2">
+                  View all posts →
+                </a>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              <!-- BLOG_POSTS_START -->
+
+                <!-- Blog Card -->
+                <a href="/blog/grails-hibernate5-filter-support.html" class="group bg-warm-white rounded-3xl shadow-sm hover:shadow-lg hover:-translate-y-2 transition-all p-8 block">
+                    <div class="flex items-center gap-2 mb-4">
+                        <span class="bg-clay/10 text-clay px-3 py-1 rounded-full text-xs font-medium uppercase tracking-wide">
+                            Grails
+                        </span>
+                        <span class="text-sm text-warm-grey">December 17, 2016</span>
+                    </div>
+                    <div>
+                        <div class="text-sm text-warm-grey mb-2">December 17, 2016</div>
+                        <h3 class="font-serif text-xl lg:text-2xl font-semibold text-charcoal mb-3 group-hover:text-clay transition-colors">Grails Hibernate Filters support for Hibernate 5</h3>
+                        <p class="text-warm-grey leading-relaxed">Grails Hibernate Filters support for Hibernate 5</p>
+                    </div>
+                </a>
+  
+
+                <!-- Blog Card -->
+                <a href="/blog/grails-spring-security-account-locking-with-redis.html" class="group bg-warm-white rounded-3xl shadow-sm hover:shadow-lg hover:-translate-y-2 transition-all p-8 block">
+                    <div class="flex items-center gap-2 mb-4">
+                        <span class="bg-clay/10 text-clay px-3 py-1 rounded-full text-xs font-medium uppercase tracking-wide">
+                            Grails
+                        </span>
+                        <span class="text-sm text-warm-grey">August 20, 2016</span>
+                    </div>
+                    <div>
+                        <div class="text-sm text-warm-grey mb-2">August 20, 2016</div>
+                        <h3 class="font-serif text-xl lg:text-2xl font-semibold text-charcoal mb-3 group-hover:text-clay transition-colors">Grails Spring Security Account Locking with Redis</h3>
+                        <p class="text-warm-grey leading-relaxed">Grails Spring Security Account Locking with Redis</p>
+                    </div>
+                </a>
+  
+
+                <!-- Blog Card -->
+                <a href="/blog/grails-jms-durable-subscription-name.html" class="group bg-warm-white rounded-3xl shadow-sm hover:shadow-lg hover:-translate-y-2 transition-all p-8 block">
+                    <div class="flex items-center gap-2 mb-4">
+                        <span class="bg-clay/10 text-clay px-3 py-1 rounded-full text-xs font-medium uppercase tracking-wide">
+                            Groovy
+                        </span>
+                        <span class="text-sm text-warm-grey">October 30, 2015</span>
+                    </div>
+                    <div>
+                        <div class="text-sm text-warm-grey mb-2">October 30, 2015</div>
+                        <h3 class="font-serif text-xl lg:text-2xl font-semibold text-charcoal mb-3 group-hover:text-clay transition-colors">Grails JMS Durable Topic Subscription Name</h3>
+                        <p class="text-warm-grey leading-relaxed">Grails JMS Durable Topic Subscription Name</p>
+                    </div>
+                </a>
+  
+                <!-- BLOG_POSTS_END -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <div id="contact" class="mx-6 lg:mx-12 my-16 lg:my-20 bg-gradient-to-br from-warm-white to-sand rounded-[40px] px-6 lg:px-12 py-16 lg:py-20 text-center relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-96 h-96 -translate-x-1/4 -translate-y-1/3 bg-sage/15 rounded-full blur-3xl"></div>
+        
+        <div class="max-w-3xl mx-auto relative z-10">
+            <h2 class="font-serif text-3xl lg:text-5xl font-semibold text-charcoal mb-6">Ready to accelerate your healthcare technology?</h2>
+            <p class="text-lg lg:text-xl text-warm-grey mb-10 leading-relaxed">
+                I work with healthcare startups and regulated companies as a Fractional CTO or VP-level advisor. Whether you need strategic product leadership, HIPAA-compliant architecture, regulatory guidance, or hands-on technical execution, let's discuss how I can help drive your business forward.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="mailto:ackramer19@gmail.com" class="inline-flex items-center justify-center gap-2 bg-clay text-warm-white px-8 py-4 rounded-full font-medium transition-all hover:bg-terracotta hover:-translate-y-1 shadow-lg hover:shadow-xl shadow-clay/25 hover:shadow-clay/35">
+                    Get in Touch
+                    <span>→</span>
+                </a>
+                <a href="/assets/resume.pdf" download class="inline-flex items-center justify-center gap-2 bg-transparent text-charcoal px-8 py-4 rounded-full font-medium border-2 border-charcoal transition-all hover:bg-charcoal hover:text-warm-white">
+                    Download Resume
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="text-center px-6 py-12 text-warm-grey">
+        <div class="flex justify-center gap-8 mb-4 flex-wrap">
+            <a href="https://github.com/alexkramer" target="_blank" class="hover:text-clay transition-colors">GitHub</a>
+            <a href="https://linkedin.com/in/alexckramer/" target="_blank" class="hover:text-clay transition-colors">LinkedIn</a>
+            <a href="mailto:ackramer19@gmail.com" class="hover:text-clay transition-colors">Email</a>
+        </div>
+        <p class="text-sm">&copy; <span id="copyright-year"></span> Alex Kramer. Greater Boston Area.</p>
+    </footer>
+</body>
+</html>
