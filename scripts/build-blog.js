@@ -130,12 +130,51 @@ function generateIndexPage(posts) {
     <!-- Navigation -->
     <nav class="fixed top-0 left-0 right-0 bg-cream/95 backdrop-blur-md z-50 px-6 lg:px-12 py-6 border-b border-clay/15">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <a href="/" class="font-serif font-semibold text-xl text-clay hover:text-terracotta transition-colors">Alex Kramer</a>
-            <ul class="flex gap-6 lg:gap-10">
-                <li><a href="/#about" class="text-sm lg:text-base hover:text-clay transition-colors">About</a></li>
-                <li><a href="/#experience" class="text-sm lg:text-base hover:text-clay transition-colors">Experience</a></li>
-                <li><a href="/blog/" class="text-sm lg:text-base text-clay font-medium">Writing</a></li>
-                <li><a href="/#contact" class="text-sm lg:text-base hover:text-clay transition-colors">Contact</a></li>
+            <a href="/" class="font-serif font-semibold text-xl text-clay hover:text-terracotta transition-colors">Alex C. Kramer</a>
+            
+            <!-- Desktop Navigation -->
+            <ul class="hidden lg:flex gap-10">
+                <li><a href="/#about" class="text-base hover:text-clay transition-colors">About</a></li>
+                <li><a href="/#experience" class="text-base hover:text-clay transition-colors">Experience</a></li>
+                <li><a href="/blog/" class="text-sm lg:text-base text-clay font-medium">Blog</a></li>
+                <li><a href="/#contact" class="text-base hover:text-clay transition-colors">Contact</a></li>
+            </ul>
+
+            <!-- Mobile Menu Button -->
+            <button 
+                id="mobile-menu-button" 
+                class="lg:hidden p-2 hover:bg-sand/50 rounded-lg transition-colors"
+                aria-label="Toggle mobile menu"
+            >
+                <!-- Menu icon (hamburger) -->
+                <svg id="menu-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+                <!-- Close icon (X) -->
+                <svg id="close-icon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div 
+            id="mobile-menu" 
+            class="lg:hidden hidden fixed inset-0 top-[73px] left-0 right-0 bg-cream z-40"
+        >
+            <ul class="flex flex-col py-6 bg-cream">
+                <li><a href="/#about" class="mobile-menu-link block px-8 py-4 text-lg hover:bg-sand/50 hover:text-clay transition-colors">
+                    About
+                </a></li>
+                <li><a href="/#experience" class="mobile-menu-link block px-8 py-4 text-lg hover:bg-sand/50 hover:text-clay transition-colors">
+                    Experience
+                </a></li>
+                <li><a href="/blog/" class="mobile-menu-link block px-8 py-4 text-lg bg-clay/10 text-clay font-medium">
+                    Blog
+                </a></li>
+                <li><a href="/#contact" class="mobile-menu-link block px-8 py-4 text-lg hover:bg-sand/50 hover:text-clay transition-colors">
+                    Contact
+                </a></li>
             </ul>
         </div>
     </nav>
@@ -170,6 +209,59 @@ function generateIndexPage(posts) {
           document.getElementById('copyright-year').textContent = new Date().getFullYear();
         </script>
     </footer>
+
+    <script>
+        // Wait for DOM to be fully loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile menu toggle
+            const menuButton = document.getElementById('mobile-menu-button')
+            const mobileMenu = document.getElementById('mobile-menu')
+            const menuIcon = document.getElementById('menu-icon')
+            const closeIcon = document.getElementById('close-icon')
+            let isMenuOpen = false
+
+            if (menuButton && mobileMenu) {
+                menuButton.addEventListener('click', () => {
+                    isMenuOpen = !isMenuOpen
+                    
+                    if (isMenuOpen) {
+                        // Show menu
+                        mobileMenu.classList.remove('hidden')
+                        // Switch icons
+                        menuIcon.classList.add('hidden')
+                        closeIcon.classList.remove('hidden')
+                    } else {
+                        // Hide menu
+                        mobileMenu.classList.add('hidden')
+                        // Switch icons
+                        menuIcon.classList.remove('hidden')
+                        closeIcon.classList.add('hidden')
+                    }
+                })
+
+                // Close menu when clicking a link
+                const mobileMenuLinks = document.querySelectorAll('.mobile-menu-link')
+                mobileMenuLinks.forEach(link => {
+                    link.addEventListener('click', () => {
+                        isMenuOpen = false
+                        mobileMenu.classList.add('hidden')
+                        menuIcon.classList.remove('hidden')
+                        closeIcon.classList.add('hidden')
+                    })
+                })
+
+                // Close menu when clicking outside
+                document.addEventListener('click', (e) => {
+                    if (isMenuOpen && !menuButton.contains(e.target) && !mobileMenu.contains(e.target)) {
+                        isMenuOpen = false
+                        mobileMenu.classList.add('hidden')
+                        menuIcon.classList.remove('hidden')
+                        closeIcon.classList.add('hidden')
+                    }
+                })
+            }
+        })
+    </script>
 </body>
 </html>`;
 
