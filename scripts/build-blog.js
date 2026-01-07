@@ -126,11 +126,11 @@ function generateIndexPage(posts) {
     <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@300;400;600;700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/src/style.css">
 </head>
-<body class="font-sans bg-cream text-charcoal">
+<body class="font-sans bg-cream text-charcoal flex flex-col min-h-screen">
     <!-- Navigation -->
-    <nav class="fixed top-0 left-0 right-0 bg-cream/95 backdrop-blur-md z-50 px-6 lg:px-12 py-6 border-b border-clay/15">
+    <nav class="bg-cream/95 backdrop-blur-md z-50 px-6 lg:px-12 py-6 border-b border-clay/15">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <a href="/" class="font-serif font-semibold text-xl text-clay hover:text-terracotta transition-colors">Alex C. Kramer</a>
+            <a href="/" class="font-serif font-semibold text-xl text-clay hover:text-terracotta transition-colors">Alex Kramer</a>
             
             <!-- Desktop Navigation -->
             <ul class="hidden lg:flex gap-10">
@@ -180,7 +180,7 @@ function generateIndexPage(posts) {
     </nav>
 
     <!-- Blog Header -->
-    <section class="mt-24 lg:mt-32 px-6 lg:px-12 py-16 bg-gradient-to-br from-warm-white to-cream">
+    <section class="px-6 lg:px-12 py-16 bg-gradient-to-br from-warm-white to-cream">
         <div class="max-w-7xl mx-auto text-center">
             <div class="inline-block text-xs lg:text-sm uppercase tracking-widest text-clay font-medium mb-4">Writing & Insights</div>
             <h1 class="font-serif text-4xl lg:text-6xl font-semibold text-charcoal mb-6">Blog</h1>
@@ -204,7 +204,7 @@ function generateIndexPage(posts) {
             <a href="https://linkedin.com/in/alexckramer/" target="_blank" class="hover:text-clay transition-colors">LinkedIn</a>
             <a href="mailto:ackramer19@gmail.com" class="hover:text-clay transition-colors">Email</a>
         </div>
-        <p class="text-sm">&copy; <span id="copyright-year"></span> Alex C. Kramer. Greater Boston Area.</p>
+        <p class="text-sm">&copy; <span id="copyright-year"></span> Alex Kramer. Greater Boston Area.</p>
         <script>
           document.getElementById('copyright-year').textContent = new Date().getFullYear();
         </script>
