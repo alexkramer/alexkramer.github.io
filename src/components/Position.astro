@@ -1,0 +1,141 @@
+---
+import type { Position } from '../data/experience'
+
+interface Props {
+  position: Position
+  nested?: boolean
+}
+
+const { position, nested = false } = Astro.props
+const { org, orgNote, years, roles, summary, highlights, clients } = position
+---
+
+<article class:list={['position', nested ? 'client' : 'row']}>
+  {!nested && <p class="label">{years}</p>}
+  <div class="text">
+    <h3>
+      {org}
+      {orgNote && <span class="org-note">({orgNote})</span>}
+    </h3>
+    <ul class="roles">
+      {
+        roles.map((role) => (
+          <li>
+            <span class="role">{role.title}</span>
+            <span class="dates">{role.dates}</span>
+          </li>
+        ))
+      }
+    </ul>
+    {summary && <p>{summary}</p>}
+    {
+      highlights && (
+        <ul class="highlights">
+          {highlights.map((item) => (
+            <li>{item}</li>
+          ))}
+        </ul>
+      )
+    }
+    {
+      clients && (
+        <div class="clients">
+          {clients.map((client) => (
+            <Astro.self position={client} nested />
+          ))}
+        </div>
+      )
+    }
+  </div>
+</article>
+
+<style>
+  h3 {
+    font-size: var(--step-1);
+  }
+
+  .client h3 {
+    font-size: var(--step-0);
+    font-family: var(--sans);
+    font-weight: 700;
+  }
+
+  .org-note {
+    font-family: var(--sans);
+    font-size: var(--step--1);
+    font-weight: 400;
+    color: var(--muted);
+    margin-left: 0.4em;
+  }
+
+  .roles {
+    padding: 0;
+    list-style: none;
+    margin-top: 0.35rem;
+  }
+
+  .roles li {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    column-gap: 1rem;
+  }
+
+  .roles li + li .role {
+    color: var(--muted);
+  }
+
+  .dates {
+    color: var(--muted);
+    font-size: var(--step--1);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+
+  .highlights {
+    padding-left: 1.1rem;
+  }
+
+  .highlights li + li {
+    margin-top: 0.4rem;
+  }
+
+  .highlights li::marker {
+    color: var(--muted);
+  }
+
+  .clients {
+    display: grid;
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+
+  /* The timeline: a rule down the text column with a marker per position */
+  .row > .text {
+    position: relative;
+    border-left: 1px solid var(--rule);
+    padding-left: 1.5rem;
+    padding-bottom: 2.75rem;
+  }
+
+  .row > .text::before {
+    content: '';
+    position: absolute;
+    left: -5px;
+    top: 0.55rem;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--ballpoint);
+  }
+
+  .client {
+    padding: 1rem 1.25rem;
+    background: var(--wash);
+    border-radius: 4px;
+  }
+
+  .client .text > * + * {
+    margin-top: 0.75rem;
+  }
+</style>

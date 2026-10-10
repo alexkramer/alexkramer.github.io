@@ -1,0 +1,179 @@
+---
+import { Image } from 'astro:assets'
+import { getCollection } from 'astro:content'
+import Base from '../layouts/Base.astro'
+import Position from '../components/Position.astro'
+import headshot from '../assets/headshot.jpg'
+import { experience, services } from '../data/experience'
+
+const posts = (await getCollection('posts')).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+const recent = posts.slice(0, 3)
+
+const description =
+  'Alex Kramer is a hands-on fractional CTO for health and insurance companies: HIPAA platforms, SOC 2 programs and lab diagnostics software.'
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Alex Kramer',
+  jobTitle: 'Fractional CTO',
+  url: 'https://www.alexckramer.com/',
+  email: 'mailto:ackramer19@gmail.com',
+  address: { '@type': 'PostalAddress', addressRegion: 'MA', addressCountry: 'US' },
+  alumniOf: 'Williams College',
+  sameAs: ['https://linkedin.com/in/alexckramer/', 'https://github.com/alexkramer'],
+}
+---
+
+<Base title="Alex Kramer, fractional CTO for health companies" description={description} jsonLd={jsonLd}>
+  <div class="wrap">
+    <section class="intro row" aria-labelledby="intro-heading">
+      <div class="photo">
+        <Image src={headshot} alt="Alex Kramer" width={288} height={288} loading="eager" fetchpriority="high" />
+      </div>
+      <div class="text">
+        <h1 id="intro-heading">I’m a hands-on CTO for health companies where compliance is part of the product.</h1>
+        <p class="lede">
+          Since 2012 I’ve built software for labs and diagnostics companies, including a HIPAA platform that ran
+          COVID-19 screening at population scale and passed SOC 2 Type 2 audits. Now I work as a fractional CTO and
+          advisor to health and insurance companies, from cancer diagnostics to mental health.
+        </p>
+        <div class="actions">
+          <a class="button" href="mailto:ackramer19@gmail.com">Email me</a>
+          <a href="/assets/resume.pdf">Download resume (PDF)</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="experience" class="section">
+      <div class="row"><div class="text"><h2>Experience</h2></div></div>
+      {experience.map((position) => <Position position={position} />)}
+    </section>
+
+    <section id="help" class="section">
+      <div class="row"><div class="text"><h2>How I help</h2></div></div>
+      <div class="row">
+        <dl class="text services">
+          {
+            services.map((service) => (
+              <div>
+                <dt>{service.name}</dt>
+                <dd>{service.detail}</dd>
+                <dd class="covers">{service.covers}</dd>
+              </div>
+            ))
+          }
+        </dl>
+      </div>
+    </section>
+
+    <section id="writing" class="section">
+      <div class="row">
+        <div class="text">
+          <h2>Writing</h2>
+          <p class="lede">Engineering notes from my years writing Grails and Groovy, 2014–2016.</p>
+        </div>
+      </div>
+      {
+        recent.map((post) => (
+          <div class="row post">
+            <p class="label">{post.data.date.getUTCFullYear()}</p>
+            <div class="text">
+              <a href={`/blog/${post.id}.html`}>{post.data.title}</a>
+              {post.data.description && post.data.description !== post.data.title && (
+                <p class="lede">{post.data.description}</p>
+              )}
+            </div>
+          </div>
+        ))
+      }
+      <div class="row"><p class="text all-posts"><a href="/blog/">All {posts.length} posts</a></p></div>
+    </section>
+
+    <section id="contact" class="section">
+      <div class="row">
+        <div class="text">
+          <h2>Contact</h2>
+          <p>
+            If you’re building in health or insurance and need a CTO for part of the week, email me at{' '}
+            <a href="mailto:ackramer19@gmail.com">ackramer19@gmail.com</a>. I’m in the Boston area and work remotely.
+          </p>
+        </div>
+      </div>
+    </section>
+  </div>
+</Base>
+
+<style>
+  .intro {
+    padding-top: 3.5rem;
+    align-items: start;
+  }
+
+  .photo img {
+    width: 6rem;
+    height: 6rem;
+    border-radius: 4px;
+    object-fit: cover;
+    margin-bottom: 1.25rem;
+  }
+
+  @media (min-width: 48rem) {
+    .intro {
+      padding-top: 5rem;
+    }
+
+    .photo img {
+      width: var(--gutter);
+      height: var(--gutter);
+      margin: 0.6rem 0 0;
+    }
+  }
+
+  h1 {
+    font-size: var(--step-3);
+    font-weight: 500;
+    line-height: 1.12;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+  }
+
+  .intro .lede {
+    margin-top: 1.5rem;
+    font-size: 1.2rem;
+  }
+
+  .services > div + div {
+    margin-top: 1.5rem;
+  }
+
+  dt {
+    font-weight: 700;
+  }
+
+  dd {
+    margin: 0;
+  }
+
+  .covers {
+    margin-top: 0.25rem;
+    color: var(--muted);
+    font-size: var(--step--1);
+  }
+
+  #writing .lede {
+    margin-bottom: 1.5rem;
+  }
+
+  .post + .post {
+    margin-top: 1.25rem;
+  }
+
+  .post .label {
+    font-size: var(--step-0);
+  }
+
+  .all-posts {
+    margin-top: 1.5rem;
+  }
+</style>
